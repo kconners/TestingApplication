@@ -17,23 +17,23 @@
                 </tr>
                 <tr style="height:25px">
                     <td>Build Number</td>
-                    <td><select id="Select_Build"></select></td>
+                    <td><select id="Select_Build" onchange="loadVersionBuildInfo();"></select></td>
                 </tr>
                 <tr style="height:25px">
                     <td>URL:</td>
-                    <td></td>
+                    <td><a id="link_loyaltynavigator"></a></td>
                 </tr>
                 <tr style="height:25px">
                     <td>Shema:</td>
-                    <td></td>
+                    <td><label id="label_navigatorshema"></label></td>
                 </tr>
                 <tr style="height:25px">
                     <td>Org Name:</td>
-                    <td></td>
+                    <td><select id="Select_org" onchange="loadOrgsEnv();"></select></td>
                 </tr>
                 <tr style="height:25px">
                     <td>Org Environment:</td>
-                    <td></td>
+                    <td><select id="Select_orgenv" onchange="loadEnvURLs();"></select></td>
                 </tr>
                 <tr style="height:25px">
                     <td>CS Portal:</td>
