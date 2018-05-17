@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <script src="Script/Environment.js"></script>
     <script type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
     <script src="Script/Product.js"></script>
 </head>
@@ -12,11 +13,11 @@
             <tbody>
                 <tr style="height:25px">
                     <td>LW Version</td>
-                    <td><select id="Select_LWVersion"></select></td>
+                    <td><select id="Select_LWVersion" onchange="loadLWBuild();"></select></td>
                 </tr>
                 <tr style="height:25px">
                     <td>Build Number</td>
-                    <td></td>
+                    <td><select id="Select_Build"></select></td>
                 </tr>
                 <tr style="height:25px">
                     <td>URL:</td>

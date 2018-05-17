@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -77,6 +78,7 @@
   <ItemGroup>
     <Content Include="index.html" />
     <Content Include="login.html" />
+    <Content Include="Script\Environment.js" />
     <Content Include="Script\glo.js" />
     <Content Include="Script\Login.js" />
     <Content Include="Script\Product.js" />
