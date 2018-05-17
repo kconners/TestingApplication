@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script src="Script/Product.js"></script>
+</head>
+<body onload="loadLWVersion()">
+    <div>
+        <table style="border-style:Solid;height:104px;width:909px;">
+            <tbody>
+                <tr style="height:25px">
+                    <td>LW Version</td>
+                    <td><select id="Select_LWVersion"></select></td>
+                </tr>
+                <tr style="height:25px">
+                    <td>Build Number</td>
+                    <td></td>
+                </tr>
+                <tr style="height:25px">
+                    <td>URL:</td>
+                    <td></td>
+                </tr>
+                <tr style="height:25px">
+                    <td>Shema:</td>
+                    <td></td>
+                </tr>
+                <tr style="height:25px">
+                    <td>Org Name:</td>
+                    <td></td>
+                </tr>
+                <tr style="height:25px">
+                    <td>Org Environment:</td>
+                    <td></td>
+                </tr>
+                <tr style="height:25px">
+                    <td>CS Portal:</td>
+                    <td></td>
+                </tr>
+                <tr style="height:25px">
+                    <td>Member Portal:</td>
+                    <td></td>
+                </tr>
+                <tr style="height:25px">
+                    <td>CDIS/API:</td>
+                    <td></td>
+                </tr>
+                <tr style="height:25px">
+                    <td>Mobile Gateway:</td>
+                    <td></td>
+                </tr>
+                <tr style="height:25px">
+                    <td>Rest API:</td>
+                    <td></td>
+                </tr>
+                <tr style="height:25px">
+                    <td>Schema:</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="Script/glo.js"></script>
+    <script>
+        function CheckToSeeIfLoggedIn() {
+            var myCookie = getCookie("username");
+            if (myCookie == null) {
+                alert("Oh Crap");
+            }
+            else {
+                document.getElementById("WellComeMsg").style.display = "block";
+            }
+            loadLWVersion();
+        }
+
+    </script>
+
+
+</body>
+</html>
