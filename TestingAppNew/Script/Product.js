@@ -91,7 +91,46 @@ function loadVersionBuildInfo() {
 }
 
 
+function loadEnvURLs() {
+    var _orgIdnumber = $('#Select_org').val();
+    var _orgenvIdnumber = $('#Select_orgenv').val();
+    
+    $.getJSON(qadataendPoint + "/TestClient/URLS?client_idnum=" + _orgIdnumber + "&env_idnum=" + _orgenvIdnumber, function (obj) {
+        $.each(obj, function (idx, item) {
+            console.log('"' + idx + '" item "' + item);
+            $.each(item, function (i, ii) {
+                console.log('"' + i + '" item "' + ii);
+                if (i === "CSURL") {
+                    $("#link_csportal").attr("href", ii);
+                    $("#link_csportal").text(ii);
+                }
+                else if (i === "MPURL") {
+                    $("#link_memberportal").attr("href", ii);
+                    $("#link_memberportal").text(ii);
+                }
+                else if (i === "APIURL") {
+                    $("#link_cdis").attr("href", ii);
+                    $("#link_cdis").text(ii);
+                }
+                else if (i === "MGWURL") {
+                    $("#link_mobilegateway").attr("href", ii);
+                    $("#link_mobilegateway").text(ii);
+                }
+                else if (i === "RESTURL") {
+                    $("#link_rest").attr("href", ii);
+                    $("#link_rest").text(ii);
+                }
+                else if (i === "Schema") {
+                    $("#label_OEshema").text(ii);
+                }
+            });
 
+        });
+
+
+    });
+    
+}
 function loadOrgs() {
     var _version = $('#Select_LWVersion option:selected').text();
     var _build = $('#Select_Build option:selected').text();
@@ -127,7 +166,6 @@ function loadOrgsEnv() {
 
         });
 
-
+        loadEnvURLs();
     });
-    dropdown.prop('selectedIndex', 1);
 }
