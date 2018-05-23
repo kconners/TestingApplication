@@ -1,1 +1,1 @@
-﻿var qadataendPoint = "http://cy2qawbs06.brierley.com:8115/api";
+﻿var qadataendPoint = "http://cy2qawbs06:8115/api";
