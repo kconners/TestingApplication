@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Test Cases</title>
+</head>
+<body>
+    <script src="Script/testcases.js"></script>
+    <script src="Script/Jira.js"></script>
+    <script src="Script/glo.js"></script>
+    <div id="navMenu">
+        <table>
+            <tr>
+
+                <td><button onclick="NavToJira()" id="Nav_Jira">Add By Jira Item</button></td>
+                <td><button onclick="NavToWorkFlow()" id="Nav_WorkFlow">Add By Work Flow</button></td>
+                <td><button onclick="NavToTestCase()" id="Nav_PlainAdd">Just Add Test Cases</button></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <div id="ContentJiraAdd" style="display:none">
+            <table style="border-style:Solid;height:104px;width:909px;">
+                <tbody>
+                    <tr style="height:25px">
+                        <td>Client</td>
+                        <td><select id="Select_Client" onchange="LoadClients();"></select></td>
+                    </tr>
+                    <tr style="height:25px">
+                        <td>Associated Release/Version</td>
+                        <td><select id="Select_Release" onchange="LoadJiraReleases();"></select></td>
+                    </tr>
+                    <tr style="height:25px">
+                        <td>Jira Info</td>
+                        <td><select id="Select_JiraItem" onchange="LoadJiraItems();"></select></td>
+                    </tr>
+                </tbody>>
+            </table>
+        </div>
+        <div id="ContentWorkFlowAdd" style="display:none">
+            <table></table>
+        </div>
+        <div id="ContentJustAdd" style="display:block">
+            <table></table>
+        </div>
+    </div>
+</body>
+</html>

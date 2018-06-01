@@ -56,7 +56,7 @@ function loadLWBuild() {
 
         });
 
-        if ($('#Select_Build option').length == 1) {
+        if ($('#Select_Build option').length === 1) {
 
             loadVersionBuildInfo();
         }
@@ -144,7 +144,7 @@ function loadOrgs() {
             });
         });
 
-        if ($('#Select_org option').length == 1) {
+        if ($('#Select_org option').length === 1) {
             
             loadOrgsEnv();
         }

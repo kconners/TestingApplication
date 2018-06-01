@@ -6,89 +6,159 @@
     <script src="Script/Environment.js"></script>
     <script type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
     <script src="Script/Product.js"></script>
+   
+
+   
 </head>
 <body onload="CheckToSeeIfLoggedIn()">
+
     <div>
-        <div id="LoginNeeded"style="display:block;float: right;">
-        <a href="login.html">Login</a>    
+        <div id="LoginNeeded" style="display:block;float: right;">
+            <a href="login.html">Login</a>
         </div>
-    <div id="LoggedIn" style="display:none;">
-        <label id="Label_LoggedIn"></label>
-</div>
-            <table style="border-style:Solid;height:104px;width:909px;">
-                <tbody>
-                    <tr style="height:25px">
-                        <td>LW Version</td>
-                        <td><select id="Select_LWVersion" onchange="loadLWBuild();"></select></td>
-                    </tr>
-                    <tr style="height:25px">
-                        <td>Build Number</td>
-                        <td><select id="Select_Build" onchange="loadVersionBuildInfo();"></select></td>
-                    </tr>
-                    <tr style="height:25px">
-                        <td>URL:</td>
-                        <td><a id="link_loyaltynavigator"></a></td>
-                    </tr>
-                    <tr style="height:25px">
-                        <td>Shema:</td>
-                        <td><label id="label_navigatorshema"></label></td>
-                    </tr>
-                    <tr style="height:25px">
-                        <td>Org Name:</td>
-                        <td><select id="Select_org" onchange="loadOrgsEnv();"></select></td>
-                    </tr>
-                    <tr style="height:25px">
-                        <td>Org Environment:</td>
-                        <td><select id="Select_orgenv" onchange="loadEnvURLs();"></select></td>
-                    </tr>
+        <div id="LoggedIn" style="display:none;">
 
-                    <tr style="height:25px">
-                        <td>CS Portal:</td>
-                        <td><a id="link_csportal"></a></td>
-                    </tr>
-                    <tr style="height:25px">
-                        <td>Member Portal:</td>
-                        <td><a id="link_memberportal"></a></td>
-                    </tr>
-                    <tr style="height:25px">
-                        <td>CDIS/API:</td>
-                        <td><a id="link_cdis"></a></td>
-                    </tr>
-                    <tr style="height:25px">
-                        <td>Mobsdfgile Gateway:</td>
-                        <td><a id="link_mobilegateway"></a></td>
-                    </tr>
-                    <tr style="height:25px">
-                        <td>Rest API:</td>
-                        <td><a id="link_rest"></a></td>
-                    </tr>
-                    <tr style="height:25px">
-                        <td>Schema:</td>
-                        <td><label id="label_OEshema"></label></td>
-
-
-                    </tr>
-                </tbody>
+            <label id="Label_LoggedIn"></label>
+        </div>
+        <div id="navMenu">
+            <table>
+                <tr>
+                    <td>
+                    <button id="Nav_LoyaltyWare" onclick="ShowProd()">Product Testing</button>
+                    </td>
+                    <td><button id="Nav_Client" onclick="ShowClient()">Client Testing</button></td>
+                    <td>
+                    <a href="testcases.html" id="Nav_Client">Test Cases</a>
+                    </td>
+                </tr>
             </table>
         </div>
-        <script src="Script/glo.js"></script>
-        <script>
-            function CheckToSeeIfLoggedIn() {
-                var myCookie = getCookie("username");
-                if (myCookie == null) {
-                    document.getElementById("LoggedIn").style.display = "none";
-                    document.getElementById("LoginNeeded").style.display = "block";
-                }
-                else {
-                    $("#Label_LoggedIn").text('Logged In as ' + myCookie);
-                    document.getElementById("LoginNeeded").style.display = "none";
-                    document.getElementById("LoggedIn").style.display = "block";
-                    
-                }
-                loadLWVersion();
-            }
+                <div id="ContentLoyaltyWare">
+                    <table style="border-style:Solid;height:104px;width:909px;">
+                        <tbody>
+                            <tr style="height:25px">
+                                <td>LW Version</td>
+                                <td><select id="Select_LWVersion" onchange="loadLWBuild();"></select></td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td>Build Number</td>
+                                <td><select id="Select_Build" onchange="loadVersionBuildInfo();"></select></td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td>URL:</td>
+                                <td><a id="link_loyaltynavigator"></a></td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td>Shema:</td>
+                                <td><label id="label_navigatorshema"></label></td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td>Org Name:</td>
+                                <td><select id="Select_org" onchange="loadOrgsEnv();"></select></td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td>Org Environment:</td>
+                                <td><select id="Select_orgenv" onchange="loadEnvURLs();"></select></td>
+                            </tr>
 
-        </script>
+                            <tr style="height:25px">
+                                <td>CS Portal:</td>
+                                <td><a id="link_csportal"></a></td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td>Member Portal:</td>
+                                <td><a id="link_memberportal"></a></td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td>CDIS/API:</td>
+                                <td><a id="link_cdis"></a></td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td>Mobsdfgile Gateway:</td>
+                                <td><a id="link_mobilegateway"></a></td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td>Rest API:</td>
+                                <td><a id="link_rest"></a></td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td>Schema:</td>
+                                <td><label id="label_OEshema"></label></td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="ContentClientTeam" style="display:none;">
+                    <table style="border-style:Solid;height:104px;width:909px;">
+                        <tbody>
+                            <tr style="height:25px">
+                                <td>Org Name:</td>
+                                <td><select id="Select_org" onchange="loadOrgsEnv();"></select></td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td>Org Environment:</td>
+                                <td><select id="Select_orgenv" onchange="loadEnvURLs();"></select></td>
+                            </tr>
+
+                            <tr style="height:25px">
+                                <td>CS Portal:</td>
+                                <td><a id="link_csportal"></a></td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td>Member Portal:</td>
+                                <td><a id="link_memberportal"></a></td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td>CDIS/API:</td>
+                                <td><a id="link_cdis"></a></td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td>Mobsdfgile Gateway:</td>
+                                <td><a id="link_mobilegateway"></a></td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td>Rest API:</td>
+                                <td><a id="link_rest"></a></td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td>Schema:</td>
+                                <td><label id="label_OEshema"></label></td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <script src="Script/glo.js"></script>
+            <script>
+                function CheckToSeeIfLoggedIn() {
+                    var myCookie = getCookie("username");
+                    if (myCookie == null) {
+                        document.getElementById("LoggedIn").style.display = "none";
+                        document.getElementById("LoginNeeded").style.display = "block";
+                    }
+                    else {
+                        $("#Label_LoggedIn").text('Logged In as ' + myCookie);
+                        document.getElementById("LoginNeeded").style.display = "none";
+                        document.getElementById("LoggedIn").style.display = "block";
+
+                    }
+                    loadLWVersion();
+                }
+
+                function ShowProd() {
+                    document.getElementById("ContentLoyaltyWare").style.display = "block";
+                    document.getElementById("ContentClientTeam").style.display = "none";
+                }
+                function ShowClient() {
+                    document.getElementById("ContentClientTeam").style.display = "block";
+                    document.getElementById("ContentLoyaltyWare").style.display = "none";
+                }
+
+            </script>
 
 
 </body>
