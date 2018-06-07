@@ -123,6 +123,12 @@ function loadEnvURLs() {
                 else if (i === "Schema") {
                     $("#label_OEshema").text(ii);
                 }
+                else if (i === "NET") {
+                    $("#label_NET").text(ii);
+                }
+                else if (i === "JAR") {
+                    $("#label_JAR").text(ii);
+                }
             });
 
         });
