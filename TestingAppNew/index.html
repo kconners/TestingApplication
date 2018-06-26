@@ -6,9 +6,9 @@
     <script src="Script/Environment.js"></script>
     <script type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
     <script src="Script/Product.js"></script>
-   
 
-   
+
+
 </head>
 <body onload="CheckToSeeIfLoggedIn()">
 
@@ -17,18 +17,18 @@
             <a href="login.html">Login</a>
         </div>
         <div id="LoggedIn" style="display:none;">
-
+            <a href ="javascript:logout()" >Logout</a>
             <label id="Label_LoggedIn"></label>
         </div>
         <div id="navMenu">
             <table>
                 <tr>
                     <td>
-                    <button id="Nav_LoyaltyWare" onclick="ShowProd()">Product Testing</button>
+                        <button id="Nav_LoyaltyWare" onclick="ShowProd()">Product Testing</button>
                     </td>
                     <td><button id="Nav_Client" onclick="ShowClient()">Client Testing</button></td>
                     <td>
-                    <a href="testcases.html" id="Nav_Client">Test Cases</a>
+                        <a href="testcases.html" id="Nav_Client">Test Cases</a>
                     </td>
                 </tr>
             </table>
@@ -49,7 +49,7 @@
                                 <td><a id="link_loyaltynavigator"></a></td>
                             </tr>
                             <tr style="height:25px">
-                                <td>Shema:</td>
+                                <td>Schema:</td>
                                 <td><label id="label_navigatorshema"></label></td>
                             </tr>
                             <tr style="height:25px">
@@ -74,7 +74,7 @@
                                 <td><a id="link_cdis"></a></td>
                             </tr>
                             <tr style="height:25px">
-                                <td>Mobsdfgile Gateway:</td>
+                                <td>Mobile Gateway:</td>
                                 <td><a id="link_mobilegateway"></a></td>
                             </tr>
                             <tr style="height:25px">
@@ -124,7 +124,7 @@
                                 <td><a id="link_cdis"></a></td>
                             </tr>
                             <tr style="height:25px">
-                                <td>Mobsdfgile Gateway:</td>
+                                <td>Mobile Gateway:</td>
                                 <td><a id="link_mobilegateway"></a></td>
                             </tr>
                             <tr style="height:25px">
@@ -166,7 +166,19 @@
                     document.getElementById("ContentClientTeam").style.display = "block";
                     document.getElementById("ContentLoyaltyWare").style.display = "none";
                 }
-
+                function logout() {
+                    delete_cookie("username", "", "cy2qawbs06");
+                    delete_cookie("okenTeh", "", "cy2qawbs06");
+                    CheckToSeeIfLoggedIn();
+                }
+                function delete_cookie(name, path, domain) {
+                    if (getCookie(name)) {
+                        document.cookie = name + "=" +
+                            ((path) ? ";path=" + path : "") +
+                            ((domain) ? ";domain=" + domain : "") +
+                            ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+                    }
+                }
             </script>
 
 

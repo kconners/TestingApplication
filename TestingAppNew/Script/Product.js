@@ -23,8 +23,11 @@
 
     //$('select option:first-child').attr("selected", "selected");
 
+
+
    
 }
+
 function loadLWBuild(Version_IDNUM) {
     let dropdown = $('#Select_Build');
     dropdown.empty();
@@ -56,10 +59,10 @@ function loadLWBuild() {
 
         });
 
-        if ($('#Select_Build option').length === 1) {
+     //   if ($('#Select_Build option').length === 1) {
 
             loadVersionBuildInfo();
-        }
+       // }
     });
     dropdown.prop('selectedIndex', 1);
 }

@@ -5,14 +5,21 @@
     <div>
 
         <lable>UserName: </lable>
-        <input type="text" id="tb_username">
+        <input type="text" id="tb_username" autofocus>
         </br>
         <lable>Password: </lable>
-        <input type="password" id="tb_password">
+        <input type="password" id="tb_password" onkeyup="onkeyup_colfield_check(event)">
         </br>
         <button onclick="login()">Click here</button>
     </div>
     <script src="Script/Login.js"></script>
+    <script>
+        function onkeyup_colfield_check(event) {
+            if (event.key === "Enter") {
+                login();
+            }
+        }
+    </script>
 
 </body>
 </html>
