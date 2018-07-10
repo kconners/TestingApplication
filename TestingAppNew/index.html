@@ -1,100 +1,146 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <style>
+        .LWEditInPut {
+            width: 100%;
+        }
+    </style>
+    <meta charset="utf-8" / >
+    <title> </title>
     <script src="Script/Environment.js"></script>
     <script type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
     <script src="Script/Product.js"></script>
-
+    <script src="Script/glo.js"></script>
 
 
 </head>
-<body onload="CheckToSeeIfLoggedIn()">
+        <body onload="CheckToSeeIfLoggedIn()" >
 
-    <div>
-        <div id="LoginNeeded" style="display:block;float: right;">
-            <a href="login.html">Login</a>
-        </div>
-        <div id="LoggedIn" style="display:none;">
-            <a href ="javascript:logout()" >Logout</a>
-            <label id="Label_LoggedIn"></label>
-        </div>
-        <div id="navMenu">
-            <table>
-                <tr>
-                    <td>
-                        <button id="Nav_LoyaltyWare" onclick="ShowProd()">Product Testing</button>
-                    </td>
-                    <td><button id="Nav_Client" onclick="ShowClient()">Client Testing</button></td>
-                    <td>
-                        <a href="testcases.html" id="Nav_Client">Test Cases</a>
-                    </td>
-                </tr>
-            </table>
-        </div>
+            <div>
+                <div id="LoginNeeded" style="display:block;float: right;">
+                    <a href="login.html"> Login</a>
+                </div>
+                <div id="LoggedIn" style="display:none;">
+                    <a href="javascript:logout()"> Logout</a>
+                    <label id="Label_LoggedIn"> </label>
+                </div>
+                <div id="navMenu">
+                    <table>
+                        <tr>
+                            <td>
+                                <button id="Nav_LoyaltyWare" onclick="ShowProd()"> Product Testing</button>
+                            </td>
+                            <td> <button id="Nav_Client" onclick="ShowClient()"> Client Testing</button> </td>
+                            <td>
+                                <a href="testcases.html" id="Nav_Client"> Test Cases</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
                 <div id="ContentLoyaltyWare">
                     <table style="border-style:Solid;height:104px;width:1200px;">
                         <tbody>
                             <tr style="height:25px">
-                                <td>LW Version</td>
-                                <td><select id="Select_LWVersion" onchange="loadLWBuild();"></select></td>
+                                <td style="width:200px"> LW Version</td>
+                                <td style="width:1000px"> <select id="Select_LWVersion" onchange="loadLWBuild();"> </select> </td>
                             </tr>
                             <tr style="height:25px">
-                                <td>Build Number</td>
-                                <td><select id="Select_Build" onchange="loadVersionBuildInfo();"></select></td>
+                                <td> Build Number</td>
+                                <td> <select id="Select_Build" onchange="loadVersionBuildInfo();"> </select> </td>
                             </tr>
                             <tr style="height:25px">
-                                <td>URL:</td>
-                                <td><a id="link_loyaltynavigator"></a></td>
+                                <td> URL:</td>
+                                <td>
+                                    <a id="link_loyaltynavigator" style="display:block" class="LWDisplay"> </a>
+                                    <input type="text" id="tb_loyaltynavigator" style="display:none" class="LWEditInPut">
+                                </td>
                             </tr>
                             <tr style="height:25px">
-                                <td>Schema:</td>
-                                <td><label id="label_navigatorshema"></label></td>
+                                <td> Schema:</td>
+                                <td>
+                                    <div>
+                                        <span id="span_label_navigatorshema" style="display:block"> <label id="label_navigatorshema" class="LWDisplay"> </label> </span>
+                                        <span id="span_tb_navigatorshema" style="display:none"> <input type="text" id="tb_navigatorshema" class="LWEditInPut"> </span>
+                                    </div>
+                                </td>
+
                             </tr>
                             <tr style="height:25px">
-                                <td>Org Name:</td>
-                                <td><select id="Select_org" onchange="loadOrgsEnv();"></select></td>
+                                <td> Org Name:</td>
+                                <td> <select id="Select_org" onchange="loadOrgsEnv();"> </select> </td>
                             </tr>
                             <tr style="height:25px">
-                                <td>Org Environment:</td>
-                                <td><select id="Select_orgenv" onchange="loadEnvURLs();"></select></td>
+                                <td> Org Environment:</td>
+                                <td> <select id="Select_orgenv" onchange="loadEnvURLs();"> </select> </td>
                             </tr>
 
                             <tr style="height:25px">
-                                <td>CS Portal:</td>
-                                <td><a id="link_csportal"></a></td>
+                                <td> CS Portal:</td>
+                                <td>
+                                    
+                                    <a id="link_csportal" class="LWDisplay"> </a>
+                                    <input type="text" id="tb_csportal" style="display:none" class="LWEditInPut">
+                                </td>
                             </tr>
                             <tr style="height:25px">
-                                <td>Member Portal:</td>
-                                <td><a id="link_memberportal"></a></td>
+                                <td> Member Portal:</td>
+                                <td>
+                                    <a id="link_memberportal" class="LWDisplay"> </a>
+                                    <input type="text" id="tb_memberportal" style="display:none" class="LWEditInPut">
+                                </td>
                             </tr>
                             <tr style="height:25px">
-                                <td>CDIS/API:</td>
-                                <td><a id="link_cdis"></a></td>
+                                <td> CDIS/API:</td>
+                                <td>
+                                    <a id="link_cdis" class="LWDisplay"> </a>
+                                    <input type="text" id="tb_cdis" style="display:none" class="LWEditInPut">
+                                </td>
                             </tr>
                             <tr style="height:25px">
-                                <td>Mobile Gateway:</td>
-                                <td><a id="link_mobilegateway"></a></td>
+                                <td> Mobile Gateway:</td>
+                                <td>
+                                    <a id="link_mobilegateway" class="LWDisplay"> </a>
+                                    <input type="text" id="tb_mobilegateway" style="display:none" class="LWEditInPut">
+                                </td>
                             </tr>
                             <tr style="height:25px">
-                                <td>Rest API:</td>
-                                <td><a id="link_rest"></a></td>
+                                <td> Rest API:</td>
+                                <td>
+                                    <a id="link_rest" class="LWDisplay"> </a>
+                                    <input type="text" id="tb_rest" style="display:none" class="LWEditInPut">
+                                </td>
                             </tr>
                             <tr style="height:25px">
-                                <td>Schema:</td>
-                                <td><label id="label_OEshema"></label></td>
+                                <td> Schema:</td>
+                                <td>
+                                    <label id="label_OEshema" class="LWDisplay"> </label>
+                                    <input type="text" id="tb_OEshema" style="display:none" class="LWEditInPut">
+                                </td>
 
 
                             </tr>
 
                             <tr style="height:25px">
-                                <td>.Net .DLL Path:</td>
-                                <td><label id="label_NET"></label></td>
+                                <td> .Net .DLL Path:</td>
+                                <td>
+                                    <label id="label_NET" class="LWDisplay"> </label>
+                                    <input type="text" id="tb_NET" style="display:none" class="LWEditInPut">
+                                </td>
                             </tr>
                             <tr style="height:25px">
-                                <td>Java .JAR Path:</td>
-                                <td><label id="label_JAR"></label></td>
+                                <td> Java .JAR Path:</td>
+                                <td>
+                                    <label id="label_JAR" class="LWDisplay"> </label>
+                                    <input type="text" id="tb_JAR" style="display:none" class="LWEditInPut">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button id="b_Product_ShowEdit" onclick="ShowEdit()" style="display:none" class="LWDisplay"> Edit</button>
+                                    <button id="b_Product_CloseEdit" onclick="CloseEdit()" style="display:none" class="LWEditInPut"> Cancel</button>
+                                    <button id="b_Product_CommitEdit" onclick="CommitEdit()" style="display:none" class="LWEditInPut"> Make Changes</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -103,37 +149,37 @@
                     <table style="border-style:Solid;height:104px;width:1200px;">
                         <tbody>
                             <tr style="height:25px">
-                                <td>Org Name:</td>
-                                <td><select id="Select_org" onchange="loadOrgsEnv();"></select></td>
+                                <td> Org Name:</td>
+                                <td> <select id="Select_org" onchange="loadOrgsEnv();"> </select> </td>
                             </tr>
                             <tr style="height:25px">
-                                <td>Org Environment:</td>
-                                <td><select id="Select_orgenv" onchange="loadEnvURLs();"></select></td>
+                                <td> Org Environment:</td>
+                                <td> <select id="Select_orgenv" onchange="loadEnvURLs();"> </select> </td>
                             </tr>
 
                             <tr style="height:25px">
-                                <td>CS Portal:</td>
-                                <td><a id="link_csportal"></a></td>
+                                <td> CS Portal:</td>
+                                <td> <a id="link_csportal"> </a> </td>
                             </tr>
                             <tr style="height:25px">
-                                <td>Member Portal:</td>
-                                <td><a id="link_memberportal"></a></td>
+                                <td> Member Portal:</td>
+                                <td> <a id="link_memberportal"> </a> </td>
                             </tr>
                             <tr style="height:25px">
-                                <td>CDIS/API:</td>
-                                <td><a id="link_cdis"></a></td>
+                                <td> CDIS/API:</td>
+                                <td> <a id="link_cdis"> </a> </td>
                             </tr>
                             <tr style="height:25px">
-                                <td>Mobile Gateway:</td>
-                                <td><a id="link_mobilegateway"></a></td>
+                                <td> Mobile Gateway:</td>
+                                <td> <a id="link_mobilegateway"> </a> </td>
                             </tr>
                             <tr style="height:25px">
-                                <td>Rest API:</td>
-                                <td><a id="link_rest"></a></td>
+                                <td> Rest API:</td>
+                                <td> <a id="link_rest"> </a> </td>
                             </tr>
                             <tr style="height:25px">
-                                <td>Schema:</td>
-                                <td><label id="label_OEshema"></label></td>
+                                <td> Schema:</td>
+                                <td> <label id="label_OEshema"> </label> </td>
 
 
                             </tr>
@@ -141,46 +187,138 @@
                     </table>
                 </div>
             </div>
-            <script src="Script/glo.js"></script>
-            <script>
-                function CheckToSeeIfLoggedIn() {
-                    var myCookie = getCookie("username");
-                    if (myCookie == null) {
-                        document.getElementById("LoggedIn").style.display = "none";
-                        document.getElementById("LoginNeeded").style.display = "block";
+ 
+        <script >
+        function CheckToSeeIfLoggedIn() {
+            var myCookie = getCookie("username");
+            if (myCookie == null)
+
+        {
+            document .getElementById("LoggedIn").style.display = "none";
+            document .getElementById("LoginNeeded").style.display = "block";
+        }
+
+        else {
+            $("#Label_LoggedIn").text('Logged In as ' + myCookie);
+            document .getElementById("LoginNeeded").style.display = "none";
+            document .getElementById("LoggedIn").style.display = "block";
+        }
+
+        loadLWVersion();
+
+        var ISLoyaltyWare;
+        getUserPermission(getCookie('okenTeh'), 'lw')
+        .then(function (value) {
+                            if (value === '1') { LogINLW(); }
+                            else { LogOutLW(); }
+                        })
+        }
+
+        function LogOutLW() {
+            document .getElementById("b_Product_ShowEdit").style.display = "none";
+            }
+ 
+        function LogINLW() {
+            document .getElementById("b_Product_ShowEdit").style.display = "block";
+        }
+
+            function ShowEdit() {
+             //   document.getElementById("b_Product_ShowEdit").style.display = "none";
+
+
+                var x = document.getElementsByClassName("LWEditInPut");
+                var i;
+                for (i = 0; i < x.length; i++) {
+                    if (x[i].tagName == 'INPUT' || x[i].tagName == 'BUTTON') {
+                        x[i].style.display = "block";
                     }
-                    else {
-                        $("#Label_LoggedIn").text('Logged In as ' + myCookie);
-                        document.getElementById("LoginNeeded").style.display = "none";
-                        document.getElementById("LoggedIn").style.display = "block";
-
-                    }
-                    loadLWVersion();
                 }
 
-                function ShowProd() {
-                    document.getElementById("ContentLoyaltyWare").style.display = "block";
-                    document.getElementById("ContentClientTeam").style.display = "none";
-                }
-                function ShowClient() {
-                    document.getElementById("ContentClientTeam").style.display = "block";
-                    document.getElementById("ContentLoyaltyWare").style.display = "none";
-                }
-                function logout() {
-                    delete_cookie("username", "", "cy2qawbs06");
-                    delete_cookie("okenTeh", "", "cy2qawbs06");
-                    CheckToSeeIfLoggedIn();
-                }
-                function delete_cookie(name, path, domain) {
-                    if (getCookie(name)) {
-                        document.cookie = name + "=" +
-                            ((path) ? ";path=" + path : "") +
-                            ((domain) ? ";domain=" + domain : "") +
-                            ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+                var x = document.getElementsByClassName("LWDisplay");
+                var i;
+                for (i = 0; i < x.length; i++) {
+                    if (x[i].tagName == 'A' || x[i].tagName == 'LABEL' || x[i].tagName == 'BUTTON') {
+                        x[i].style.display = "none";
                     }
                 }
-            </script>
 
 
-</body>
-</html>
+
+            }
+
+            function CloseEdit() {
+
+         //       document.getElementsByClassName("LWEditInPut").style.display = "none";
+         //   document .getElementById("b_Product_ShowEdit").style.display = "block";
+
+                var x = document.getElementsByClassName("LWEditInPut");
+                var i;
+                for (i = 0; i < x.length; i++) {
+                    if (x[i].tagName == 'INPUT' || x[i].tagName == 'BUTTON') {
+                        x[i].style.display = "none";
+                    }
+                }
+
+                var x = document.getElementsByClassName("LWDisplay");
+                var i;
+                for (i = 0; i < x.length; i++) {
+                  //  alert(x[i].tagName)
+                    if (x[i].tagName == 'A' || x[i].tagName == 'LABEL' || x[i].tagName == 'BUTTON') {
+                        x[i].style.display = "block";
+                    }
+                }
+
+
+
+        }
+
+        function CommitEdit() {
+            ////getUserPermission(getCookie('okenTeh'), 'row_idnumber').then(function (value) { console.log(value); alert(value); });
+            //var _orgIdnumber = $('#Select_org').val();
+            //var _program_idnum;
+            //getProgram(_orgIdnumber, 'All')
+            //    .then(function (value) { _program_idnum = value.Program_IDNUM; });
+
+            //// document.getElementById("ContentLoyaltyWare").style.display = "block";
+            //// document.getElementById("ContentClientTeam").style.display = "none";
+            UpdateOrgEnvValue("#tb_csportal", "CS");
+            UpdateOrgEnvValue("#tb_memberportal", "MP");
+            UpdateOrgEnvValue("#tb_cdis", "API");
+            UpdateOrgEnvValue("#tb_mobilegateway", "MGW");
+            UpdateOrgEnvValue("#tb_rest", "RST");
+       //     UpdateOrgEnvValue("#tb_NET", "Schema");
+            UpdateOrgEnvValue("#tb_NET", "NET");
+            UpdateOrgEnvValue("#tb_JAR", "JAR");
+
+        }
+
+        function ShowProd() {
+            document .getElementById("ContentLoyaltyWare").style.display = "block";
+            document .getElementById("ContentClientTeam").style.display = "none";
+        }
+
+        function ShowClient() {
+            document .getElementById("ContentClientTeam").style.display = "block";
+            document .getElementById("ContentLoyaltyWare").style.display = "none";
+        }
+
+        function logout() {
+            delete_cookie("username", "", "cy2qawbs06");
+            delete_cookie("okenTeh", "", "cy2qawbs06");
+            CheckToSeeIfLoggedIn();
+            window .location.reload(false);
+        }
+
+        function delete_cookie(name, path, domain) {
+            if (getCookie(name))
+
+        {
+            document .cookie = name + "=" + ((path) ? ";path=" + path : "") + ((domain) ? ";domain=" + domain : "") + ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+        }
+
+        }
+        </script >
+
+
+        </body >
+        </html >

@@ -93,7 +93,60 @@ function loadVersionBuildInfo() {
    
 }
 
+function UpdateOrgEnvValue(ElementID, Application) {
+    var _version = $('#Select_LWVersion option:selected').text();
+    var _build = $('#Select_Build option:selected').text();
+    var _orgname = $('#Select_org option:selected').text();
+    var _orgIdnumber = $('#Select_org').val();
+    var _orgenvIdnumber = $('#Select_orgenv').val();
+    var _env = $('#Select_orgenv option:selected').text();
+    
+    var _fullurl = $(ElementID).val();
+    var _application_idnum;
+    var _program_idnum;
 
+
+    getProgram(_orgIdnumber, 'All')
+        .then(function (value) { _program_idnum = value.Program_IDNUM; })
+        .then(function (value) {
+            getApplication(Application)
+                .then(function (value) {
+                    _application_idnum = value;
+                });
+        })
+        .then(function (value) { 
+        
+            
+
+    if (Application !== "LN" && Application !== "LNShema") {
+        //var _url;
+        var _url = {
+            "Status": 1,
+            "env_idnumber": _orgenvIdnumber,
+            "client_idnumber": _orgIdnumber,
+            "fullurl": _fullurl,
+            "Status": 1,
+            "row_idnumber": _orgIdnumber,
+            "program_idnumber": _program_idnum,
+            "name": _orgname + "_" + _env + "_" + Application,
+            "description": _orgname + "_" + _env + "_" + Application,
+            "application_idnumber": _application_idnum,
+            "ap_srtname": Application
+
+        };
+        
+        var xhr = new XMLHttpRequest();
+        
+        xhr.open("POST", qadataendPoint + "/URL?loggedInas=kconners", false);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.setRequestHeader("Cache-Control", "no-cache");
+        xhr.send(JSON.stringify(_url));
+        
+      //  alert(JSON.stringify(_url));
+    }
+        });
+
+}
 function loadEnvURLs() {
     var _orgIdnumber = $('#Select_org').val();
     var _orgenvIdnumber = $('#Select_orgenv').val();
@@ -106,31 +159,39 @@ function loadEnvURLs() {
                 if (i === "CSURL") {
                     $("#link_csportal").attr("href", ii);
                     $("#link_csportal").text(ii);
+                    $("#tb_csportal").val(ii);
                 }
                 else if (i === "MPURL") {
                     $("#link_memberportal").attr("href", ii);
                     $("#link_memberportal").text(ii);
+                    $("#tb_memberportal").val(ii);
                 }
                 else if (i === "APIURL") {
                     $("#link_cdis").attr("href", ii);
                     $("#link_cdis").text(ii);
+                    $("#tb_cdis").val(ii);
                 }
                 else if (i === "MGWURL") {
                     $("#link_mobilegateway").attr("href", ii);
                     $("#link_mobilegateway").text(ii);
+                    $("#tb_mobilegateway").val(ii);
                 }
                 else if (i === "RESTURL") {
                     $("#link_rest").attr("href", ii);
                     $("#link_rest").text(ii);
+                    $("#tb_rest").val(ii);
                 }
                 else if (i === "Schema") {
                     $("#label_OEshema").text(ii);
+                    $("#tb_OEshema").val(ii);
                 }
                 else if (i === "NET") {
                     $("#label_NET").text(ii);
+                    $("#tb_NET").val(ii);
                 }
                 else if (i === "JAR") {
                     $("#label_JAR").text(ii);
+                    $("#tb_JAR").val(ii);
                 }
             });
 
@@ -140,6 +201,7 @@ function loadEnvURLs() {
     });
     
 }
+
 function loadOrgs() {
     var _version = $('#Select_LWVersion option:selected').text();
     var _build = $('#Select_Build option:selected').text();

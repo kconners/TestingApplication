@@ -3,9 +3,13 @@ var user;
 var pw;
 function login() {
     var username = document.getElementById("tb_username").value;
+    var pp = document.getElementById("tb_password").value;
 
-    encrypt(document.getElementById("tb_password").value)
-        .then(LOGIN(username, pw))
+    encrypt(encodeURIComponent(document.getElementById("tb_password").value))
+        .then(
+
+        LOGIN(username, pw)
+        )
         .then(new function () { window.location = "index.html"; });
         }
 
@@ -19,6 +23,7 @@ function Enter() {
 }
 function LOGIN(_username, _password) {
     return new Promise(function (resolve, reject) {
+
         var data = null;
         var xhr = new XMLHttpRequest();
 
