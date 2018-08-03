@@ -84,8 +84,10 @@
     <Content Include="Script\Jira.js" />
     <Content Include="Script\Login.js" />
     <Content Include="Script\Product.js" />
+    <Content Include="Script\QAComplete.js" />
     <Content Include="Script\testcases.js" />
     <Content Include="testcases.html" />
+    <Content Include="UserProfile\testingpreferences.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

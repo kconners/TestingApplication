@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script src="../Script/Environment.js"></script>
+    <script src="../Script/glo.js"></script>
+    <script src="../Script/QAComplete.js"></script>
+    <script src="../Script/Client.js"></script>
+    <title></title>
+</head>
+<body onload="LoadClients('Select_client')">
+    <table>
+        <tr>
+            <td style="width:235px"><label style="padding-left:15px">Client</label></td>
+            <td> <select id="Select_client" onchange="LoadReleases()" style="width:150px"> </select> </td>
+        </tr>
+        <tr>
+            <td style="width:235px"><label style="padding-left:15px">Release</label></td>
+            <td><select id="Select_release" onchange="LoadIteration()" style="width:150px"> </select> </td>
+        </tr>
+        <tr>
+            <td style="width:235px"><label style="padding-left:15px">Environment/Iteration</label></td>
+            <td><select id="Select_iteration" onchange="LoadBuild()" style="width:150px"> </select> </td>
+        </tr>
+        <tr>
+            <td style="width:235px"><label style="padding-left:15px">Build</label></td>
+            <td><select id="Select_build" onchange="CheckOnLoyaltyware()" style="width:150px"> </select> </td>
+        </tr>
+        <tr></tr>
+
+    </table>
+    
+        <fieldset id="fieldset_testorg" disabled  style="width:400px">
+            <legend>Test Client:</legend>
+            <table>
+                <tr>
+                    <td style="width:220px">Org:</td>
+                    <td><select id="Select_org" onchange="CheckOnLoyaltyware()" style="width:150px"> </select></td>
+                </tr>
+                <tr>
+                    <td style="width:220px">Org's Environment:</td>
+                    <td><select id="Select_orgs_env" onchange="CheckOnLoyaltyware()" style="width:150px"> </select></td>
+                </tr>
+            </table>
+        </fieldset>
+    
+        <button style="width:400px" onclick="UpdateUsersTestingPrefferences()">Make Update</button>
+
+            <script>
+                function UpdateUsersTestingPrefferences() {
+
+                }
+                function LoadReleases() {
+                    var _client_idnum = $('#Select_client').val();
+                    loadReleases(_client_idnum, "Select_release");
+                }
+                function LoadIteration() {
+                    var _release = $('#Select_release').val();
+                    GetReleaseIDNUM(_release).then(function (value) {
+                        loadIterations(value, "Select_iteration")
+                    });
+
+                }
+                function LoadBuild() {
+                    var _release = $('#Select_iteration').val();
+                    GetReleaseIDNUM(_release).then(function (value) {
+                        loadBuilds(value, "Select_build")
+                    });
+
+                }
+                function CheckOnLoyaltyware() {
+                    var clientName = $("#Select_client option:selected").text();
+                    var _release = $("#Select_release option:selected").text();
+                    var _build = $("#Select_build option:selected").text();
+
+                    if (clientName.toLowerCase() === "Loyaltyware".toLowerCase()) {
+                        document.getElementById("fieldset_testorg").disabled = false;
+                        loadTestClient(_release, _build, 'Select_org');
+                    }
+
+                    //    var _build_idnum = $('#Select_build').val();
+                    //    //loadIterations(_release_idnum, "Select_release");
+                }
+            </script>
+</body >
+</html >

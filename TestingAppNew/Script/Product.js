@@ -18,7 +18,7 @@
             
         });
                 
-        loadLWBuild();
+        loadLWIteration();
         });
 
     //$('select option:first-child').attr("selected", "selected");
@@ -47,11 +47,13 @@ function loadLWBuild(Version_IDNUM) {
 }
 function loadLWBuild() {
     var Version_IDNUM = $('#Select_LWVersion').val();
+    var Iteration_IDNUM = $('#Select_LWIteration').val();
+
     let dropdown = $('#Select_Build');
     dropdown.empty();
     dropdown.prop('selectedIndex', 0);
     
-    $.getJSON(qadataendPoint +"/LoyaltyBuild?version_idnum=" + Version_IDNUM, function (obj) {
+    $.getJSON(qadataendPoint + "/LoyaltyBuild?version_idnum=" + Version_IDNUM +"&iteration_idnum="+Iteration_IDNUM, function (obj) {
         $.each(obj, function (idx, item) {
             $.each(item, function (i, ii) {
                 dropdown.append($('<option></option>').attr('value', ii.build_idnumber).text(ii.build_name));
@@ -59,18 +61,19 @@ function loadLWBuild() {
 
         });
 
-     //   if ($('#Select_Build option').length === 1) {
+        //if ($('#Select_Build option').length === 1) {
 
             loadVersionBuildInfo();
-       // }
+        //}
     });
     dropdown.prop('selectedIndex', 1);
 }
 function loadVersionBuildInfo() {
    
     var _versionIDNUM = $('#Select_LWVersion').val();
+    
     var _buildIDNUM = $('#Select_Build').val();
-
+    
     $.getJSON(qadataendPoint + "/VersionBuildDetails?version_idnum=" + _versionIDNUM + "&build_idnum=" + _buildIDNUM, function (obj) {
         $.each(obj, function (idx, item) {
             $.each(item, function (i, ii) {
@@ -92,7 +95,27 @@ function loadVersionBuildInfo() {
 
    
 }
+function loadLWIteration() {
+    var Version_IDNUM = $('#Select_LWVersion').val();
+    let dropdown = $('#Select_LWIteration');
+    dropdown.empty();
+    dropdown.prop('selectedIndex', 0);
 
+    $.getJSON(qadataendPoint + "/LoyaltyIteration?version_idnum=" + Version_IDNUM, function (obj) {
+        $.each(obj, function (idx, item) {
+            $.each(item, function (i, ii) {
+                dropdown.append($('<option></option>').attr('value', ii.iteration_idnumber).text(ii.iteration_name));
+            });
+
+        });
+
+        //   if ($('#Select_Build option').length === 1) {
+
+        loadLWBuild();
+        // }
+    });
+    dropdown.prop('selectedIndex', 1);
+}
 function UpdateOrgEnvValue(ElementID, Application) {
     var _version = $('#Select_LWVersion option:selected').text();
     var _build = $('#Select_Build option:selected').text();
@@ -121,12 +144,11 @@ function UpdateOrgEnvValue(ElementID, Application) {
     if (Application !== "LN" && Application !== "LNShema") {
         //var _url;
         var _url = {
-            "Status": 1,
             "env_idnumber": _orgenvIdnumber,
             "client_idnumber": _orgIdnumber,
             "fullurl": _fullurl,
             "Status": 1,
-            "row_idnumber": _orgIdnumber,
+            "row_idnumber": guid(),
             "program_idnumber": _program_idnum,
             "name": _orgname + "_" + _env + "_" + Application,
             "description": _orgname + "_" + _env + "_" + Application,
@@ -147,6 +169,20 @@ function UpdateOrgEnvValue(ElementID, Application) {
         });
 
 }
+
+function guid() {
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+}
+
+function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+}
+
+
+
 function loadEnvURLs() {
     var _orgIdnumber = $('#Select_org').val();
     var _orgenvIdnumber = $('#Select_orgenv').val();
@@ -204,10 +240,45 @@ function loadEnvURLs() {
 
 function loadOrgs() {
     var _version = $('#Select_LWVersion option:selected').text();
+    var _iteration = $('#Select_LWIteration option:selected').text();
     var _build = $('#Select_Build option:selected').text();
     let dropdown = $('#Select_org');
     dropdown.empty();
-    $.getJSON(qadataendPoint + "/TestClient?release=" + _version + "&build=" + _build, function (obj) {
+    let OrgEnvdropdown = $('#Select_orgenv');
+    OrgEnvdropdown.empty();
+    
+    document.getElementById("link_csportal").text = "";
+    document.getElementById("tb_csportal").value = "";
+
+    document.getElementById("link_memberportal").text = "";
+    document.getElementById("tb_memberportal").value = "";
+
+    document.getElementById("link_cdis").text = "";
+    document.getElementById("tb_cdis").value = "";
+
+    document.getElementById("link_mobilegateway").text = "";
+    document.getElementById("tb_mobilegateway").value = "";
+
+    document.getElementById("link_rest").text = "";
+    document.getElementById("tb_rest").value = "";
+
+
+    $('label[id*="label_OEshema"]').text('');
+    $('label[id*="label_NET"]').text('');
+    $('label[id*="label_JAR"]').text('');
+
+
+  //  document.getElementById("label_OEshema").text = "";
+    document.getElementById("tb_OEshema").value = "";
+
+ //   document.getElementById("label_NET").text = "";
+    document.getElementById("tb_NET").value = "";
+
+ //   document.getElementById("label_JAR").text = "";
+    document.getElementById("tb_JAR").value = "";
+
+    
+    $.getJSON(qadataendPoint + "/TestClient?release=" + _version + "&build=" + _build + "&iteration=" + _iteration, function (obj) {
         $.each(obj, function (idx, item) {
 
             $.each(item, function (i, ii) {

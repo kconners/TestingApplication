@@ -52,8 +52,8 @@ function LOGIN(_username, _password) {
 
 function sleep(miliseconds) {
     var currentTime = new Date().getTime();
-    while (currentTime + miliseconds >= new Date().getTime()) {
-    }
+    //while (currentTime + miliseconds >= new Date().getTime()) {
+    //}
 }
 
 function setCookie(cname, cvalue, exdays) {

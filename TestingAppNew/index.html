@@ -5,6 +5,48 @@
         .LWEditInPut {
             width: 100%;
         }
+        .dropbtn {
+            background-color: #3498DB;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+            .dropbtn:hover, .dropbtn:focus {
+                background-color: #2980B9;
+            }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            overflow: auto;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+        .dropdown a:hover {
+            background-color: #ddd;
+        }
+
+        .show {
+            display: block;
+        }
     </style>
     <meta charset="utf-8" / >
     <title> </title>
@@ -27,14 +69,32 @@
                 </div>
                 <div id="navMenu">
                     <table>
+                        <tr id="navigation_highlevel">
+                            <td>
+                                <div class="dropdown">
+                                    <button onclick="myFunction('testcases')" class="dropbtn">Test Cases</button>
+                                    <div id="dd_testcases" class="dropdown-content">
+                                        <a href="#home">Add By Jira</a>
+                                        <a href="#home">Add By Workflow</a>
+                                        <a href="#about">Just Add Test Cases</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button onclick="myFunction('automation')" class="dropbtn">Automation</button>
+                                    <div id="dd_automation" class="dropdown-content">
+                                        <a href="#home">Run Scripts As:</a>
+                                        <a href="UserProfile/testingpreferences.html">My Testing Preferences</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
                         <tr>
                             <td>
                                 <button id="Nav_LoyaltyWare" onclick="ShowProd()"> Product Testing</button>
                             </td>
                             <td> <button id="Nav_Client" onclick="ShowClient()"> Client Testing</button> </td>
-                            <td>
-                                <a href="testcases.html" id="Nav_Client"> Test Cases</a>
-                            </td>
                         </tr>
                     </table>
                 </div>
@@ -43,7 +103,11 @@
                         <tbody>
                             <tr style="height:25px">
                                 <td style="width:200px"> LW Version</td>
-                                <td style="width:1000px"> <select id="Select_LWVersion" onchange="loadLWBuild();"> </select> </td>
+                                <td style="width:1000px"> <select id="Select_LWVersion" onchange="loadLWIteration();"> </select> </td>
+                            </tr>
+                            <tr style="height:25px">
+                                <td style="width:200px"> LW Iteration</td>
+                                <td style="width:1000px"> <select id="Select_LWIteration" onchange="loadLWBuild();"> </select> </td>
                             </tr>
                             <tr style="height:25px">
                                 <td> Build Number</td>
@@ -78,7 +142,7 @@
                             <tr style="height:25px">
                                 <td> CS Portal:</td>
                                 <td>
-                                    
+
                                     <a id="link_csportal" class="LWDisplay"> </a>
                                     <input type="text" id="tb_csportal" style="display:none" class="LWEditInPut">
                                 </td>
@@ -188,136 +252,156 @@
                 </div>
             </div>
  
-        <script >
-        function CheckToSeeIfLoggedIn() {
-            var myCookie = getCookie("username");
-            if (myCookie == null)
+            <script>
+                function myFunction(Menu) {
+                    if (Menu === "testcases") { document.getElementById("dd_testcases").classList.toggle("show"); }
+                    else if (Menu === "automation") { document.getElementById("dd_automation").classList.toggle("show"); }
+                }
 
-        {
-            document .getElementById("LoggedIn").style.display = "none";
-            document .getElementById("LoginNeeded").style.display = "block";
-        }
+                // Close the dropdown if the user clicks outside of it
+                window.onclick = function (event) {
+                    if (!event.target.matches('.dropbtn')) {
 
-        else {
-            $("#Label_LoggedIn").text('Logged In as ' + myCookie);
-            document .getElementById("LoginNeeded").style.display = "none";
-            document .getElementById("LoggedIn").style.display = "block";
-        }
+                        var dropdowns = document.getElementsByClassName("dropdown-content");
+                        var i;
+                        for (i = 0; i < dropdowns.length; i++) {
+                            var openDropdown = dropdowns[i];
+                            if (openDropdown.classList.contains('show')) {
+                                openDropdown.classList.remove('show');
+                            }
+                        }
+                    }
+                }
 
-        loadLWVersion();
+                function CheckToSeeIfLoggedIn() {
+                    var myCookie = getCookie("username");
+                    if (myCookie == null) {
+                        document.getElementById("LoggedIn").style.display = "none";
+                        document.getElementById("LoginNeeded").style.display = "block";
 
-        var ISLoyaltyWare;
-        getUserPermission(getCookie('okenTeh'), 'lw')
-        .then(function (value) {
+                        document.getElementById("navigation_highlevel").style.display = "none";
+                    }
+
+                    else {
+                        $("#Label_LoggedIn").text('Logged In as ' + myCookie);
+                        document.getElementById("LoginNeeded").style.display = "none";
+                        document.getElementById("LoggedIn").style.display = "block";
+                        document.getElementById("navigation_highlevel").style.display = "block";
+                    }
+
+                    loadLWVersion();
+
+                    var ISLoyaltyWare;
+                    getUserPermission(getCookie('okenTeh'), 'lw')
+                        .then(function (value) {
                             if (value === '1') { LogINLW(); }
                             else { LogOutLW(); }
                         })
-        }
-
-        function LogOutLW() {
-            document .getElementById("b_Product_ShowEdit").style.display = "none";
-            }
- 
-        function LogINLW() {
-            document .getElementById("b_Product_ShowEdit").style.display = "block";
-        }
-
-            function ShowEdit() {
-             //   document.getElementById("b_Product_ShowEdit").style.display = "none";
-
-
-                var x = document.getElementsByClassName("LWEditInPut");
-                var i;
-                for (i = 0; i < x.length; i++) {
-                    if (x[i].tagName == 'INPUT' || x[i].tagName == 'BUTTON') {
-                        x[i].style.display = "block";
-                    }
                 }
 
-                var x = document.getElementsByClassName("LWDisplay");
-                var i;
-                for (i = 0; i < x.length; i++) {
-                    if (x[i].tagName == 'A' || x[i].tagName == 'LABEL' || x[i].tagName == 'BUTTON') {
-                        x[i].style.display = "none";
-                    }
+                function LogOutLW() {
+                    document.getElementById("b_Product_ShowEdit").style.display = "none";
                 }
 
-
-
-            }
-
-            function CloseEdit() {
-
-         //       document.getElementsByClassName("LWEditInPut").style.display = "none";
-         //   document .getElementById("b_Product_ShowEdit").style.display = "block";
-
-                var x = document.getElementsByClassName("LWEditInPut");
-                var i;
-                for (i = 0; i < x.length; i++) {
-                    if (x[i].tagName == 'INPUT' || x[i].tagName == 'BUTTON') {
-                        x[i].style.display = "none";
-                    }
+                function LogINLW() {
+                    document.getElementById("b_Product_ShowEdit").style.display = "block";
                 }
 
-                var x = document.getElementsByClassName("LWDisplay");
-                var i;
-                for (i = 0; i < x.length; i++) {
-                  //  alert(x[i].tagName)
-                    if (x[i].tagName == 'A' || x[i].tagName == 'LABEL' || x[i].tagName == 'BUTTON') {
-                        x[i].style.display = "block";
+                function ShowEdit() {
+                    //   document.getElementById("b_Product_ShowEdit").style.display = "none";
+
+
+                    var x = document.getElementsByClassName("LWEditInPut");
+                    var i;
+                    for (i = 0; i < x.length; i++) {
+                        if (x[i].tagName == 'INPUT' || x[i].tagName == 'BUTTON') {
+                            x[i].style.display = "block";
+                        }
                     }
+
+                    var x = document.getElementsByClassName("LWDisplay");
+                    var i;
+                    for (i = 0; i < x.length; i++) {
+                        if (x[i].tagName == 'A' || x[i].tagName == 'LABEL' || x[i].tagName == 'BUTTON') {
+                            x[i].style.display = "none";
+                        }
+                    }
+
+
+
                 }
 
+                function CloseEdit() {
+
+                    //       document.getElementsByClassName("LWEditInPut").style.display = "none";
+                    //   document .getElementById("b_Product_ShowEdit").style.display = "block";
+
+                    var x = document.getElementsByClassName("LWEditInPut");
+                    var i;
+                    for (i = 0; i < x.length; i++) {
+                        if (x[i].tagName == 'INPUT' || x[i].tagName == 'BUTTON') {
+                            x[i].style.display = "none";
+                        }
+                    }
+
+                    var x = document.getElementsByClassName("LWDisplay");
+                    var i;
+                    for (i = 0; i < x.length; i++) {
+                        //  alert(x[i].tagName)
+                        if (x[i].tagName == 'A' || x[i].tagName == 'LABEL' || x[i].tagName == 'BUTTON') {
+                            x[i].style.display = "block";
+                        }
+                    }
 
 
-        }
 
-        function CommitEdit() {
-            ////getUserPermission(getCookie('okenTeh'), 'row_idnumber').then(function (value) { console.log(value); alert(value); });
-            //var _orgIdnumber = $('#Select_org').val();
-            //var _program_idnum;
-            //getProgram(_orgIdnumber, 'All')
-            //    .then(function (value) { _program_idnum = value.Program_IDNUM; });
+                }
 
-            //// document.getElementById("ContentLoyaltyWare").style.display = "block";
-            //// document.getElementById("ContentClientTeam").style.display = "none";
-            UpdateOrgEnvValue("#tb_csportal", "CS");
-            UpdateOrgEnvValue("#tb_memberportal", "MP");
-            UpdateOrgEnvValue("#tb_cdis", "API");
-            UpdateOrgEnvValue("#tb_mobilegateway", "MGW");
-            UpdateOrgEnvValue("#tb_rest", "RST");
-       //     UpdateOrgEnvValue("#tb_NET", "Schema");
-            UpdateOrgEnvValue("#tb_NET", "NET");
-            UpdateOrgEnvValue("#tb_JAR", "JAR");
+                function CommitEdit() {
+                    ////getUserPermission(getCookie('okenTeh'), 'row_idnumber').then(function (value) { console.log(value); alert(value); });
+                    //var _orgIdnumber = $('#Select_org').val();
+                    //var _program_idnum;
+                    //getProgram(_orgIdnumber, 'All')
+                    //    .then(function (value) { _program_idnum = value.Program_IDNUM; });
 
-        }
+                    //// document.getElementById("ContentLoyaltyWare").style.display = "block";
+                    //// document.getElementById("ContentClientTeam").style.display = "none";
+                    UpdateOrgEnvValue("#tb_csportal", "CS");
+                    UpdateOrgEnvValue("#tb_memberportal", "MP");
+                    UpdateOrgEnvValue("#tb_cdis", "API");
+                    UpdateOrgEnvValue("#tb_mobilegateway", "MGW");
+                    UpdateOrgEnvValue("#tb_rest", "RST");
+                    //     UpdateOrgEnvValue("#tb_NET", "Schema");
+                    UpdateOrgEnvValue("#tb_NET", "NET");
+                    UpdateOrgEnvValue("#tb_JAR", "JAR");
 
-        function ShowProd() {
-            document .getElementById("ContentLoyaltyWare").style.display = "block";
-            document .getElementById("ContentClientTeam").style.display = "none";
-        }
+                }
 
-        function ShowClient() {
-            document .getElementById("ContentClientTeam").style.display = "block";
-            document .getElementById("ContentLoyaltyWare").style.display = "none";
-        }
+                function ShowProd() {
+                    document.getElementById("ContentLoyaltyWare").style.display = "block";
+                    document.getElementById("ContentClientTeam").style.display = "none";
+                }
 
-        function logout() {
-            delete_cookie("username", "", "cy2qawbs06");
-            delete_cookie("okenTeh", "", "cy2qawbs06");
-            CheckToSeeIfLoggedIn();
-            window .location.reload(false);
-        }
+                function ShowClient() {
+                    document.getElementById("ContentClientTeam").style.display = "block";
+                    document.getElementById("ContentLoyaltyWare").style.display = "none";
+                }
 
-        function delete_cookie(name, path, domain) {
-            if (getCookie(name))
+                function logout() {
+                    delete_cookie("username", "", "cy2qawbs06");
+                    delete_cookie("okenTeh", "", "cy2qawbs06");
+                    CheckToSeeIfLoggedIn();
+                    window.location.reload(false);
+                }
 
-        {
-            document .cookie = name + "=" + ((path) ? ";path=" + path : "") + ((domain) ? ";domain=" + domain : "") + ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
-        }
+                function delete_cookie(name, path, domain) {
+                    if (getCookie(name)) {
+                        document.cookie = name + "=" + ((path) ? ";path=" + path : "") + ((domain) ? ";domain=" + domain : "") + ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+                    }
 
-        }
-        </script >
+                }
+
+            </script>  
 
 
         </body >
