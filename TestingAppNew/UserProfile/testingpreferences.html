@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                     <td style="width:220px">Org's Environment:</td>
-                    <td><select id="Select_orgs_env" onchange="CheckOnLoyaltyware()" style="width:150px"> </select></td>
+                    <td><select id="Select_orgs_env" style="width:150px"> </select></td>
                 </tr>
             </table>
         </fieldset>
@@ -48,7 +48,139 @@
         <button style="width:400px" onclick="UpdateUsersTestingPrefferences()">Make Update</button>
 
             <script>
+
+                function LoadOrgsEnv(_selectID) {
+
+
+                    var org_IDNUM = $('#Select_org').val();
+                    let dropdown = $('#Select_orgs_env');
+                    dropdown.empty();
+
+
+                    $.getJSON(qadataendPoint + "/TestClientEnv?Org_IDNUM=" + org_IDNUM, function (obj) {
+                        $.each(obj, function (idx, item) {
+                            $.each(item, function (i, ii) {
+                                dropdown.append($('<option></option>').attr('value', ii.Env_IDNumber).text(ii.Environment));
+                            });
+
+                        });
+                    });
+                    
+                }
+                function loadTestClient(_selectID) {
+                    var _release = $("#Select_release option:selected").text();
+                    
+                    var _iteration = $("#Select_iteration option:selected").text();
+                    
+                    var _build = $("#Select_build option:selected").text();
+                    
+
+                    let dropdown = $('#' + _selectID);
+                    dropdown.empty();
+                    dropdown.prop('selectedIndex', 0);
+
+                    $.getJSON(qadataendPoint + "/TestClient/?release=" + _release + "&build=" + _build + "&iteration=" + _iteration, function (obj) {
+                         $.each(obj, function (idx, item) {
+                             $.each(item, function (i, ii) {
+                                 dropdown.append($('<option></option>').attr('value', ii.client_idnum).text(ii.client_name));
+                             });
+                         });
+
+                         if ($('#' + _selectID).length === 1) {
+
+                             LoadOrgsEnv('Select_orgs_env');
+
+
+                              };
+
+
+                      });
+                      dropdown.prop('selectedIndex', 1);
+
+                }
+
+
                 function UpdateUsersTestingPrefferences() {
+                    var _client = $('#Select_client').val();
+                    var _release = $('#Select_release').val();
+                    var _iteration = $('#Select_iteration').val();
+                    var _environment = $('#Select_iteration option:selected').text();
+                    var _build = $('#Select_build').val();
+                    var _org = $('#Select_org').val();
+                    var _orgenv = $('#Select_orgs_env').val();
+
+
+                    var _UID = "";
+                    var _Env_IDNUM = "";
+                    var _Build_IDNUM = "";
+                    var _Iteration_IDNUM = "";
+                    var _Release_IDNUM = "";
+
+                    getUserPermission(getCookie('okenTeh'), 'row_idnumber')
+                        .then(function (value) { console.log("1 " + value); _UID = value; })
+                        .then(function () { return new Promise(function (resolve) { resolve(GetEnvironment(_environment)); })  })
+                        .then(function (value) { _Env_IDNUM = value; })
+
+                        .then(function () { return new Promise(function (resolve) { resolve(GetReleaseIDNUM(_build)); }) })
+                        .then(function (value) { _Build_IDNUM = value; })
+
+                        .then(function () { return new Promise(function (resolve) { resolve(GetReleaseIDNUM(_iteration)); }) })
+                        .then(function (value) { _Iteration_IDNUM = value; })
+
+                        .then(function () { return new Promise(function (resolve) { resolve(GetReleaseIDNUM(_release)); }) })
+                        .then(function (value) { _Release_IDNUM = value; })
+
+                        .then(function () {
+                            
+                            var clint = $("#Select_client option:selected").text();
+
+
+                            var _url = {
+                                "Build_IDNumber": _Build_IDNUM,
+                                "Client_IDNumber": _client,
+                                "Env_IDNumber": _Env_IDNUM,
+                                "Iteration_IDNumber": _Iteration_IDNUM,
+                                "OrgEnv_IDNumber": _orgenv,
+                                "Org_IDNumber": _org,
+                                "Release_IDNumber": _Release_IDNUM,
+                                "TestingPref_IDNUM": '982fb60b-141c-4451-b326-d6d871e577be',
+                                "User_IDNumber": _UID,
+                                "Status": 1
+                                //    "client_idnumber": _orgIdnumber,
+                                //    "fullurl": _fullurl,
+                                //    "Status": 1,
+                                //    "row_idnumber": guid(),
+                                //    "program_idnumber": _program_idnum,
+                                //    "name": _orgname + "_" + _env + "_" + Application,
+                                //    "description": _orgname + "_" + _env + "_" + Application,
+                                //    "application_idnumber": _application_idnum,
+                                //    "ap_srtname": Application
+
+                            };
+                            alert(JSON.stringify(_url));
+                            console.log(JSON.stringify(_url));
+
+                            var xhr = new XMLHttpRequest();
+
+                            xhr.open("POST", qadataendPoint + "/UserTestingPrefForRunItem?loggedInas=" + getCookie("username"), false);
+                            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                            xhr.setRequestHeader("Cache-Control", "no-cache");
+                            xhr.send(JSON.stringify(_url));
+
+                            
+
+                        }).then(new function () { window.location = "../index.html"; });
+
+
+
+
+
+                   // var coo = getCookie("okenTeh").then;
+                   // console.log(coo);
+                   // var UID = getUserPermission(coo, 'row_idnumber');
+                    
+
+
 
                 }
                 function LoadReleases() {
@@ -76,7 +208,7 @@
 
                     if (clientName.toLowerCase() === "Loyaltyware".toLowerCase()) {
                         document.getElementById("fieldset_testorg").disabled = false;
-                        loadTestClient(_release, _build, 'Select_org');
+                        loadTestClient('Select_org');
                     }
 
                     //    var _build_idnum = $('#Select_build').val();

@@ -8,10 +8,12 @@ function getUserPermission(token, value) {
     return new Promise(function (resolve, reject) {
         var data = null;
         var xhr = new XMLHttpRequest();
-
+      
         xhr.addEventListener("readystatechange", function () {
             if (this.readyState === 4 && this.status === 200) {
+                console.log(this.responseText);
                 val = JSON.parse(this.responseText);
+                console.log(val.Value);
                 resolve(val.Value);
             }
         });
@@ -53,7 +55,17 @@ function getProgram(Org_IDNUM, ProgramName) {
         xhr.send(data);
     });
 }
-
+function GetEnvironment(EnvName) {
+    return new Promise(function (resolve, reject) {
+        $.getJSON(qadataendPoint + "/Environment?Name=" + EnvName, function (obj) {
+            $.each(obj, function (idx, item) {
+                console.log(item[0].Env_IDNumber);
+                console.log(item[0]);
+                resolve(item[0].Env_IDNumber);
+            });
+        });
+    });
+}
     function getApplication(AppShortName) {
         return new Promise(function (resolve, reject) {
             var data = null;
