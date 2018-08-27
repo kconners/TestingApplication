@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Client Setup</title>
+    <script src="../Script/Client.js"></script>
+    <script src="../Script/Environment.js"></script>
+    <script type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script src="../Script/glo.js"></script>
+</head>
+<body onload="LoadClients('Select_clientName')">
+    <div>
+        <table>
+            <tbody>
+                <tr style="height:25px">
+                    <td> Client Name:</td>
+                    <td><button id="b_client_info" onclick="ShowNewClient()" style="display:none">+</button>                    </td>
+                    <td>
+                        <div>
+                            <span id="span_dd_clientname" style="display:block">
+                                <select id="Select_clientName" onchange="loadClientInfo();"> </select>
+                            </span>
+
+                            <span id="span_tb_clientname" style="display:none">
+                                <input type="text" id="tb_clientname" class="LWEditInPut">
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+
+        function LoadOrgsEnv(_selectID) {
+
+
+            var org_IDNUM = $('#Select_org').val();
+            let dropdown = $('#Select_orgs_env');
+            dropdown.empty();
+
+
+            $.getJSON(qadataendPoint + "/TestClientEnv?Org_IDNUM=" + org_IDNUM, function (obj) {
+                $.each(obj, function (idx, item) {
+                    $.each(item, function (i, ii) {
+                        dropdown.append($('<option></option>').attr('value', ii.Env_IDNumber).text(ii.Environment));
+                    });
+
+                });
+            });
+
+        }
+    </script>
+</body>
+
+
+</html >

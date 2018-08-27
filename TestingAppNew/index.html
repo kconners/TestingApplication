@@ -89,6 +89,18 @@
                                     </div>
                                 </div>
                             </td>
+                            <td>
+                                <div class="dropdown" id="menuitem_loyaltyware">
+                                    <button onclick="myFunction('loyaltyware')" class="dropbtn">LoyaltyWare</button>
+                                    <div id="dd_loyaltyware" class="dropdown-content">
+                                        <a href="Client/clientsetup.html">Client</a>
+                                        <a href="#home">R/I/B</a>
+                                        <a href="#home">Details</a>
+                                        <a href="#home">DAP Runner</a>
+                                        <a href="#home">Standard Tables</a>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -256,6 +268,7 @@
                 function myFunction(Menu) {
                     if (Menu === "testcases") { document.getElementById("dd_testcases").classList.toggle("show"); }
                     else if (Menu === "automation") { document.getElementById("dd_automation").classList.toggle("show"); }
+                    else if (Menu === "loyaltyware") { document.getElementById("dd_loyaltyware").classList.toggle("show"); }
                 }
 
                 // Close the dropdown if the user clicks outside of it
@@ -301,10 +314,12 @@
 
                 function LogOutLW() {
                     document.getElementById("b_Product_ShowEdit").style.display = "none";
+                    document.getElementById("menuitem_loyaltyware").style.display = "none";
                 }
 
                 function LogINLW() {
                     document.getElementById("b_Product_ShowEdit").style.display = "block";
+                    document.getElementById("menuitem_loyaltyware").style.display = "block";
                 }
 
                 function ShowEdit() {
